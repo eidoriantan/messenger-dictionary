@@ -22,5 +22,8 @@ describe('Bot test', () => {
       })
   })
 
-  after(() => server.close())
+  after(() => {
+    require('./dictionary.js')
+    server.close()
+  })
 })
