@@ -1,6 +1,9 @@
 
 # Messenger Dictionary
 
+[![Node.js CI](https://github.com/eidoriantan/messenger-dictionary/workflows/Node.js%20CI/badge.svg)](https://github.com/eidoriantan/messenger-dictionary/actions?query=workflow%3A%22Node.js+CI%22)
+[![Build Status](https://travis-ci.com/eidoriantan/messenger-dictionary.svg?token=Hk9gXA7HZjP174YVjdRu&branch=master)](https://travis-ci.com/eidoriantan/messenger-dictionary)
+
 Visit the [Facebook page](https://fb.com/msgr.dictionary) or chat the bot at
 [Messenger](https://m.me/msgr.dictionary)
 
