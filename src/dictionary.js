@@ -28,7 +28,7 @@ async function getDef (word) {
       })
     })
 
-    result = `${count} word(s) was found\r\n` + result
+    result = `${count} word(s) was found\r\n\r\n` + result
   }
 
   return result
