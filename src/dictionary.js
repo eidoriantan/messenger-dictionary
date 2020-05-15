@@ -13,7 +13,7 @@ async function getDef (word) {
   let result = ''
 
   const defToString = object => {
-    let string = `Word: ${object.meta.id}\r\n`
+    let string = `*Word*: ${object.meta.id}\r\n`
     object.shortdef.forEach((def, index) => {
       string += `Definition ${index + 1}:\r\n`
       string += def + '\r\n\r\n'
@@ -28,7 +28,7 @@ async function getDef (word) {
       result += 'Word was not found. Did you mean:\r\n'
       result += response.body.join(', ') + '?'
     } else {
-      result += `${response.body.length} word(s) was found`
+      result += `${response.body.length} word(s) was found\r\n`
       response.body.forEach(word => {
         result += defToString(word)
       })
