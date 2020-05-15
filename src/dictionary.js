@@ -23,7 +23,6 @@ async function getDef (word) {
   }
 
   if (Array.isArray(response.body)) {
-    console.log('ARRAY')
     if (typeof response.body[0] === 'string') {
       result += 'Word was not found. Did you mean:\r\n'
       result += response.body.join(', ') + '?'
