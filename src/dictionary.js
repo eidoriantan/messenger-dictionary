@@ -18,7 +18,7 @@ async function getDef (word) {
   const response = await request('GET', url)
   let result = ''
 
-  if (typeof response.body[0] === 'string') {
+  if (response.body.length === 0 || typeof response.body[0] === 'string') {
     result += 'Word was not found. Did you mean:\r\n'
     result += response.body.map(word => `"${word}"`).join(', ') + '?'
   } else if (typeof response.body[0] === 'object') {
