@@ -22,7 +22,7 @@ async function getDef (word) {
 
       count++
       result += `*Word:* ${item.meta.id}\r\n`
-      result.shortdef.forEach((def, index) => {
+      item.shortdef.forEach((def, index) => {
         result += `Definition ${index + 1}:\r\n`
         result += def + '\r\n\r\n'
       })
