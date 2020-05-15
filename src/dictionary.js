@@ -4,6 +4,12 @@ const request = require('./utils/request.js')
 const API = 'https://dictionaryapi.com/api/v3/references/ithesaurus/json'
 const API_KEY = process.env.API_KEY
 
+/**
+ *  Gets the word's definitions using the Merriam-Webster's
+ *
+ *    @param {string} word    The word to get the definitions from
+ *    @return {string} result
+ */
 async function getDef (word) {
   const params = new URLSearchParams()
   params.set('key', API_KEY)
