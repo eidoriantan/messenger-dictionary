@@ -12,27 +12,24 @@ async function getDef (word) {
   const response = await request('GET', url)
   let result = ''
 
-  const defToString = object => {
-    let string = `*Word*: ${object.meta.id}\r\n`
-    object.shortdef.forEach((def, index) => {
-      string += `Definition ${index + 1}:\r\n`
-      string += def + '\r\n\r\n'
+  if (typeof response.body[0] === 'string') {
+    result += 'Word was not found. Did you mean:\r\n'
+    result += response.body.map(word => `"${word}"`).join(', ') + '?'
+  } else if (typeof response.body[0] === 'object') {
+    let count = 0
+    response.body.forEach(item => {
+      if (item.meta.id !== word) return
+
+      count++
+      result += `*Word:* ${item.meta.id}\r\n`
+      result.shortdef.forEach((def, index) => {
+        result += `Definition ${index + 1}:\r\n`
+        result += def + '\r\n\r\n'
+      })
     })
 
-    return string
+    result = `${count} word(s) was found\r\n` + result
   }
-
-  if (Array.isArray(response.body)) {
-    if (typeof response.body[0] === 'string') {
-      result += 'Word was not found. Did you mean:\r\n'
-      result += response.body.join(', ') + '?'
-    } else {
-      result += `${response.body.length} word(s) was found\r\n`
-      response.body.forEach(word => {
-        result += defToString(word)
-      })
-    }
-  } else result += defToString(response.body)
 
   return result
 }
