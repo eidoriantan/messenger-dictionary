@@ -33,10 +33,7 @@ async function getDef (word) {
         result += defToString(word)
       })
     }
-  } else {
-    console.log('ARRAY')
-    result += defToString(response.body)
-  }
+  } else result += defToString(response.body)
 
   return result
 }

@@ -105,7 +105,7 @@ async function receivedMessage (event) {
   if (DEBUG) console.log(`Message was received with text: ${text}`)
   await sendTyping(senderID)
 
-  const response = dictionary.getDef(text)
+  const response = await dictionary.getDef(text)
   await sendMessage(senderID, response)
 }
 
