@@ -1,7 +1,7 @@
 
 const request = require('./utils/request.js')
 
-const API = 'https://www.dictionaryapi.com/api/v3/references/ithesaurus/json'
+const API = 'https://dictionaryapi.com/api/v3/references/ithesaurus/json'
 const API_KEY = process.env.API_KEY
 
 async function getDef (word) {
@@ -12,7 +12,7 @@ async function getDef (word) {
   const response = await request('GET', url)
   let result = ''
 
-  const defToString = (object) => {
+  const defToString = object => {
     let string = `Word: ${object.meta.id}\r\n`
     object.shortdef.forEach((def, index) => {
       string += `Definition ${index + 1}:\r\n`
@@ -22,7 +22,8 @@ async function getDef (word) {
     return string
   }
 
-  if (Array.isArray(response.body) && typeof response.body[0] === 'string') {
+  if (Array.isArray(response.body)) {
+    console.log('ARRAY')
     if (typeof response.body[0] === 'string') {
       result += 'Word was not found. Did you mean:\r\n'
       result += response.body.join(', ') + '?'
@@ -32,7 +33,10 @@ async function getDef (word) {
         result += defToString(word)
       })
     }
-  } else result += defToString(response.body)
+  } else {
+    console.log('ARRAY')
+    result += defToString(response.body)
+  }
 
   return result
 }
