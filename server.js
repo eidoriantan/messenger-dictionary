@@ -100,7 +100,7 @@ function handleEvent (event) {
 async function receivedMessage (event) {
   const senderID = event.sender.id
   const message = event.message
-  const text = message.text
+  const text = encodeURIComponent(message.text)
 
   if (DEBUG) console.log(`Message was received with text: ${text}`)
   await sendTyping(senderID)
