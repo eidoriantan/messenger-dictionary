@@ -17,14 +17,17 @@ async function getDef (word) {
 
   const url = `${API}/${word}?${params.toString()}`
   const response = await request('GET', url)
+  const body = response.body
   let result = ''
 
-  if (response.body.length === 0 || typeof response.body[0] === 'string') {
+  if (typeof body === 'string') {
+    result = body
+  } else if (body.length === 0 || typeof body[0] === 'string') {
     result += 'Word was not found. Did you mean:\r\n'
-    result += response.body.map(word => `"${word}"`).join(', ') + '?'
-  } else if (typeof response.body[0] === 'object') {
+    result += body.map(word => `"${word}"`).join(', ') + '?'
+  } else if (typeof body[0] === 'object') {
     let count = 0
-    response.body.forEach(item => {
+    body.forEach(item => {
       if (item.meta.id !== word) return
 
       count++
