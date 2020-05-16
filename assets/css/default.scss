@@ -1,0 +1,9 @@
+---
+---
+
+@import "default";
+@import url("/assets/css/primer.css");
+
+.bg-color {
+  background-color: {{ site.color }} !important;
+}
