@@ -13,7 +13,6 @@ const FB_ENDPOINT = 'https://graph.facebook.com/v7.0/me'
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN
 const VALIDATION_TOKEN = process.env.VALIDATION_TOKEN
 const APP_SECRET = process.env.APP_SECRET
-
 const PORT = process.env.PORT || 8080
 const DEBUG = process.env.DEBUG || false
 
@@ -67,29 +66,18 @@ app.post('/webhook', (req, res) => {
         console.log(event)
       }
 
-      handleEvent(event)
+      if (event.message) {
+        receivedMessage(event)
+      } else {
+        console.error('Unknown/unsupported event:')
+        console.error(event)
+      }
     })
   })
 
   res.status(200).send('Success')
   return true
 })
-
-/**
- *  Handles all events that are received through webhook. All received events
- *  are executed asynchronously.
- *
- *    @param {object} event    Event object sent by Facebook
- *    @return void
- */
-function handleEvent (event) {
-  if (event.message) {
-    receivedMessage(event)
-  } else {
-    console.error('Unknown/unsupported event:')
-    console.error(event)
-  }
-}
 
 /**
  *  Handles all messages received.
