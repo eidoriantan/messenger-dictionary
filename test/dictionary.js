@@ -13,7 +13,6 @@ describe('Dictionary', () => {
 
   it('Get definitions of a non-existent word', async () => {
     const response = await dictionary.getDef('adajbwasdgvys')
-    console.log(response)
     const result = response.indexOf('Word was not found') > -1
     should.ok(result)
   })
