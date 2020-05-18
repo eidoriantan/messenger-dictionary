@@ -1,8 +1,8 @@
 ---
 ---
 {
-    "name": "{{ site.title }}",
-    "short_name": "{{ site.title }}",
+    "name": "Messenger Dictionary",
+    "short_name": "Messenger Dictionary",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
