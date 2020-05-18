@@ -12,8 +12,8 @@
     "dictionary"
   ],
   "homepage": "https://dictionary.eidoriantan.tech",
-  "bugs": "https://github.com/messenger-translator/messenger-dictionary/issues",
-  "license": "UNLICENSED",
+  "bugs": "https://github.com/eidoriantan/messenger-dictionary/issues",
+  "license": "Apache-2.0",
   "author": {
     "name": "Adriane Justine Tan",
     "email": "eidoriantan@gmail.com",
