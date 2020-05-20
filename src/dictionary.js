@@ -27,7 +27,8 @@ const API_KEY = process.env.API_KEY
  *    @return {string} result
  */
 async function getDef (word) {
-  word = word.toLowerCase()
+  word = encodeURIComponent(word.toLowerCase())
+
   const params = new URLSearchParams()
   params.set('key', API_KEY)
 
