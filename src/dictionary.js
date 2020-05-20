@@ -17,7 +17,7 @@
 
 const request = require('./utils/request.js')
 
-const API = 'https://dictionaryapi.com/api/v3/references/ithesaurus/json'
+const API = 'https://dictionaryapi.com/api/v3/references/collegiate/json'
 const API_KEY = process.env.API_KEY
 
 /**
