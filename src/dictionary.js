@@ -48,7 +48,7 @@ async function getDef (word) {
       if (item.meta.id.split(':')[0] !== word) return
 
       count++
-      result += `*Word:* ${item.meta.id}\r\n`
+      result += `*Word:* ${item.meta.id} (${item.fl})\r\n`
       item.shortdef.forEach((def, index) => {
         result += `Definition ${index + 1}:\r\n`
         result += def + '\r\n\r\n'
