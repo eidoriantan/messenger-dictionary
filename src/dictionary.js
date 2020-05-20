@@ -45,7 +45,7 @@ async function getDef (word) {
   } else if (typeof body[0] === 'object') {
     let count = 0
     body.forEach(item => {
-      if (item.meta.id !== word) return
+      if (item.hwi.hw !== word) return
 
       count++
       result += `*Word:* ${item.meta.id}\r\n`
