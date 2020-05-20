@@ -1,6 +1,6 @@
 {
   "name": "messenger-dictionary",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Webhook for Messenger dictionary using Express",
   "keywords": [
     "node",
