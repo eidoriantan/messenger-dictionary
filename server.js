@@ -104,6 +104,7 @@ async function receivedMessage (event) {
   const text = encodeURIComponent(message.text)
 
   if (DEBUG) console.log(`Message was received with text: ${text}`)
+  await send(senderID, null, 'mark_seen')
   await send(senderID, null, 'typing_on')
 
   const response = await dictionary.getDef(text)
