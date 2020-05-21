@@ -30,7 +30,7 @@ const DEBUG = process.env.DEBUG
  *    @param {string} type    Send message type
  *    @return void
  */
-module.exports = async function (psid, text, type) {
+module.exports = async function (psid, text, type = 'message') {
   const params = new URLSearchParams()
   params.set('access_token', ACCESS_TOKEN)
   params.set('appsecret_proof', getProof())
