@@ -18,13 +18,10 @@
 const express = require('express')
 const crypto = require('crypto')
 
-const request = require('./src/utils/request.js')
-const getProof = require('./src/utils/proof.js')
+const send = require('./src/utils/send.js')
 const dictionary = require('./src/dictionary.js')
 
 const app = express()
-
-const FB_ENDPOINT = 'https://graph.facebook.com/v7.0/me'
 
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN
 const VALIDATION_TOKEN = process.env.VALIDATION_TOKEN
@@ -107,53 +104,10 @@ async function receivedMessage (event) {
   const text = encodeURIComponent(message.text)
 
   if (DEBUG) console.log(`Message was received with text: ${text}`)
-  await sendTyping(senderID)
+  await send(senderID, null, 'typing_on')
 
   const response = await dictionary.getDef(text)
-  await sendMessage(senderID, response)
-}
-
-/**
- *  Sends a message to user by calling Messenger's Send API.
- *
- *    @param {string} psid    User's page-scoped ID
- *    @param {string} text    The message to send
- *    @return void
- */
-async function sendMessage (psid, text) {
-  const params = new URLSearchParams()
-  params.set('access_token', ACCESS_TOKEN)
-  params.set('appsecret_proof', getProof())
-
-  const url = `${FB_ENDPOINT}/messages?${params.toString()}`
-  const data = {
-    messaging_type: 'RESPONSE',
-    recipient: { id: psid },
-    message: { text }
-  }
-
-  if (DEBUG) console.log(`Sending user "${psid}": ${text}`)
-  await request('POST', url, {}, data)
-}
-
-/**
- *  Sends user a typing on indicator.
- *
- *    @param {string} psid    User's page-scoped ID
- */
-async function sendTyping (psid) {
-  const params = new URLSearchParams()
-  params.set('access_token', ACCESS_TOKEN)
-  params.set('appsecret_proof', getProof())
-  const url = `${FB_ENDPOINT}/messages?${params.toString()}`
-  const data = {
-    messaging_type: 'RESPONSE',
-    recipient: { id: psid },
-    sender_action: 'typing_on'
-  }
-
-  if (DEBUG) { console.debug('Sending user typing on action') }
-  await request('POST', url, {}, data)
+  await send(senderID, response)
 }
 
 const server = app.listen(PORT, () => {
