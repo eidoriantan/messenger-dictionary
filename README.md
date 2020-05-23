@@ -8,7 +8,7 @@ English Dictionary bot app built for [Facebook Messenger](https://messenger.com)
 Visit the [Facebook page](https://fb.com/msgr.dictionary) or send a message
 through [Messenger](https://m.me/msgr.dictionary).
 
-This project uses [Express](https://expressjs.com),
+This project uses [Express](https://expressjs.com) and
 [Merriam-Webster API](https://dictionaryapi.com) to get the definitions of words.
 
 ## Features
