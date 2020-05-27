@@ -32,13 +32,16 @@
   },
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint -c .eslintrc.json . --ext .js,.mjs",
+    "commitlint": "git log -1 --format=%B | commitlint",
+    "lint": "eslint -c .eslintrc.json . --ext .js,.mjs && npm run commitlint",
     "test": "npm run lint && mocha --colors"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.20.2",
