@@ -12,7 +12,8 @@ This project uses [Express](https://expressjs.com) and
 [Merriam-Webster API](https://dictionaryapi.com) to get the definitions of words.
 
 ## Features
- * Gives the simple definitions of a word
+ * Interactive messaging
+ * Gives the simple definitions
 
 ### Support
 If you had found a bug or any unexpected behavior, you can submit an issue
