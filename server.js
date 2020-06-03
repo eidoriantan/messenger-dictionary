@@ -103,7 +103,11 @@ app.post('/webhook', (req, res) => {
 async function receivedMessage (event) {
   const senderID = event.sender.id
   const message = event.message
-  const text = encodeURIComponent(message.text)
+  let text = ''
+
+  if (message.text && typeof message.text === 'string') {
+    text = encodeURIComponent(message.text.toLowerCase())
+  }
 
   if (message.attachments) {
     await send(senderID, 'We don\'t currently support handling attachments ' +
