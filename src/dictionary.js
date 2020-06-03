@@ -32,7 +32,7 @@ async function getDef (word) {
   const params = new URLSearchParams()
   params.set('key', API_KEY)
 
-  const url = `${API}/${word}?${params.toString()}`
+  const url = `${API}/${encodeURIComponent(word)}?${params.toString()}`
   const response = await request('GET', url)
   const body = response.body
   let result = ''
