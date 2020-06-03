@@ -106,7 +106,7 @@ async function receivedMessage (event) {
   let text = ''
 
   if (message.text && typeof message.text === 'string') {
-    text = encodeURIComponent(message.text.toLowerCase())
+    text = encodeURIComponent(message.text.trim().toLowerCase())
   }
 
   if (message.attachments) {
