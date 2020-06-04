@@ -45,10 +45,11 @@ async function getDef (word) {
   } else if (typeof body[0] === 'object') {
     let count = 0
     body.forEach(item => {
-      if (item.meta.id.split(':')[0] !== word) return
+      const meta = item.meta
+      if (meta.id.split(':')[0] !== word && !meta.stems.includes(word)) return
 
       count++
-      result += `*Word:* ${item.meta.id} (${item.fl})\r\n`
+      result += `*Word:* ${meta.id} (${item.fl})\r\n`
       item.shortdef.forEach((def, index) => {
         result += `Definition ${index + 1}:\r\n`
         result += def + '\r\n\r\n'
