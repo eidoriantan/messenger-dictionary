@@ -29,6 +29,8 @@ const API_KEY = process.env.API_KEY
  *    @return {string} result
  */
 async function getDef (word) {
+  word = word.replace(/[?%&]/g, '')
+
   const params = new URLSearchParams()
   params.set('key', API_KEY)
 
