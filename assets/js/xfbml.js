@@ -15,7 +15,7 @@ window.fbAsyncInit = function () {
     version: 'v7.0'
   })
 
-  FB.AppEvents.setAppVersion('1.1.5')
+  FB.AppEvents.setAppVersion('1.1.6')
 
   $('[data-fbml]').each(function () {
     const element = $(this)
