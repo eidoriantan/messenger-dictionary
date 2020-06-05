@@ -39,7 +39,9 @@ async function getDef (word) {
   const body = response.body
   let result = ''
 
-  if (typeof body === 'string') {
+  if (response.status >= 400) {
+    result = 'Unable to process the request.'
+  } else if (typeof body === 'string') {
     result = body
   } else if (body.length === 0 || typeof body[0] === 'string') {
     result += 'Word was not found. Did you mean:\r\n'
