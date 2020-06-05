@@ -22,8 +22,8 @@ words.
 If you had found a bug or any unexpected behavior, you can submit an issue
 through GitHub
 [issues](https://github.com/eidoriantan/messenger-dictionary/issues) or post at
-the [Facebook page]. If you wanted to contribute
-to this repository, please refer to
+the [Facebook page]. If you wanted to contribute to this repository and become a
+contributor, please refer to
 [CONTRIBUTING.md](https://github.com/eidoriantan/messenger-dictionary/blob/master/CONTRIBUTING.md).
 
 You can also show your support by becoming a patron!
