@@ -1,12 +1,17 @@
 
 # Messenger Dictionary Website
 
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fdictionary.eidoriantan.tech)](https://dictionary.eidoriantan.tech)
-[![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fdictionary.eidoriantan.tech)](https://dictionary.eidoriantan.tech)
+[![GitHub Deployments](https://img.shields.io/github/deployments/eidoriantan/messenger-dictionary/github-pages)](https://github.com/eidoriantan/messenger-dictionary/deployments)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fdictionary.eidoriantan.tech)][homepage]
+[![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fdictionary.eidoriantan.tech)][homepage]
 
-Public repository of the site [dictionary.eidoriantan.tech](https://dictionary.eidoriantan.tech).
-The website was automatically built by [Jekyll](https://jekyllrb.com) and was deployed using the
-[GitHub Pages](https://pages.github.com).
+Public repository of the project's [homepage]. It was automatically built by
+[Jekyll] and was deployed using the [GitHub Pages].
 
-Any contributions such as suggestions or any improvements to the site are welcome.
-Just file an issue.
+Any contributions such as suggestions or any improvements to the site are
+welcome. Feel free to file an issue.
+
+[homepage]: https://dictionary.eidoriantan.tech
+
+[Jekyll]: https://jekyllrb.com
+[GitHub Pages]: https://pages.github.com
