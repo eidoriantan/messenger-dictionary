@@ -63,7 +63,8 @@ async function getDef (word) {
       })
     })
 
-    result = `${count} word(s) was found\r\n\r\n` + result
+    result = `${count} word(s) was found\r\n\r\n` + result +
+      '\r\n\r\nPowered by: Merriam-Webster Dictionary'
   }
 
   return result
