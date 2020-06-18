@@ -1,9 +1,9 @@
 
 exclude:
+  - CNAME
   - Gemfile
   - Gemfile.lock
   - README.md
-  - CNAME
 
 sass:
   style: compressed
