@@ -1,7 +1,6 @@
 
 # Messenger Dictionary Website
 
-[![GitHub Deployments](https://img.shields.io/github/deployments/eidoriantan/messenger-dictionary/github-pages)](https://github.com/eidoriantan/messenger-dictionary/deployments)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fdictionary.eidoriantan.tech)][homepage]
 [![W3C Validation](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fdictionary.eidoriantan.tech)][homepage]
 
