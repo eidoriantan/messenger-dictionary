@@ -18,18 +18,20 @@
  */
 
 const express = require('express')
+const serveIndex = require('serve-index')
 const crypto = require('crypto')
 
+const logger = require('./src/utils/log.js')
 const send = require('./src/utils/send.js')
 const dictionary = require('./src/dictionary.js')
-
-const app = express()
 
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN
 const VALIDATION_TOKEN = process.env.VALIDATION_TOKEN
 const APP_SECRET = process.env.APP_SECRET
 const PORT = process.env.PORT || 8080
 const DEBUG = process.env.DEBUG || false
+
+const app = express()
 
 if (!ACCESS_TOKEN || !VALIDATION_TOKEN || !APP_SECRET) {
   throw new Error('Access, App Secret and/or validation token was not defined')
@@ -49,12 +51,25 @@ app.use(express.json({
     const elements = signature.split('=')
     const method = elements[0]
     const hash = elements[1]
-    const expected = crypto.createHmac(method, APP_SECRET)
-      .update(buf)
-      .digest('hex')
+    const hmac = crypto.createHmac(method, APP_SECRET)
+    const expected = hmac.update(buf).digest('hex')
 
-    if (hash !== expected) throw new Error('Invalid signature')
+    if (hash !== expected) {
+      logger.write('Invalid signature')
+      logger.write(`Signature: ${signature}`)
+      logger.write('Body:')
+      logger.write(req.body)
+
+      res.status(403).send('Invalid signature')
+      throw new Error('Invalid signature')
+    }
   }
+}))
+
+const logs = logger.directory
+app.use('/logs', express.static(logs), serveIndex(logs, {
+  icons: true,
+  view: 'details'
 }))
 
 app.get('/webhook', (req, res) => {
@@ -66,7 +81,11 @@ app.get('/webhook', (req, res) => {
     res.status(200).send(challenge)
     return true
   } else {
-    res.status(403).send('Verification token does not match!')
+    logger.write('Mode/verification token doesn\'t match')
+    logger.write('Parameters:')
+    logger.write({ mode, verifyToken, challenge })
+
+    res.status(403).send('Mode/verification token doesn\'t match')
     return false
   }
 })
@@ -74,9 +93,11 @@ app.get('/webhook', (req, res) => {
 app.post('/webhook', (req, res) => {
   const data = req.body
   if (data.object !== 'page') {
-    console.error('Object is not a page: ')
-    console.error(data)
-    res.status(403).send('Object is not a page')
+    logger.write('Object is not a page')
+    logger.write('Data:')
+    logger.write(data)
+
+    res.status(403).send('An error has occurred')
     return false
   }
 
@@ -90,8 +111,12 @@ app.post('/webhook', (req, res) => {
       if (event.message) {
         receivedMessage(event)
       } else {
-        console.error('Unknown/unsupported event:')
-        console.error(event)
+        logger.write('Unknown/unsupported event')
+        logger.write('Event:')
+        logger.write(event)
+
+        res.status(403).send('Unknown/unsupported event')
+        return false
       }
     })
   })
