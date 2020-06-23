@@ -19,6 +19,7 @@
 
 const express = require('express')
 const serveIndex = require('serve-index')
+const cors = require('cors')
 const crypto = require('crypto')
 
 const logger = require('./src/utils/log.js')
@@ -67,7 +68,7 @@ app.use(express.json({
 }))
 
 const logs = logger.directory
-app.use('/logs', express.static(logs), serveIndex(logs, {
+app.use('/logs', cors(), express.static(logs), serveIndex(logs, {
   icons: true,
   view: 'details'
 }))
