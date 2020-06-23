@@ -169,4 +169,11 @@ process.on('unhandledRejection', error => {
   logger.write(error)
 })
 
+process.on('SIGINT', () => {
+  server.close(() => {
+    console.log('Exiting process...')
+    process.exit(1)
+  })
+})
+
 module.exports = { app, server }
