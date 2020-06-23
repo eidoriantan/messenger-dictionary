@@ -157,4 +157,16 @@ const server = app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
 
+process.on('uncaughtException', error => {
+  logger.write('Uncaught Exception')
+  logger.write(`Error: ${error.message}`)
+  logger.write(`Stack: ${error.stack}`)
+})
+
+process.on('unhandledRejection', error => {
+  logger.write('Unhandled Promise rejection')
+  logger.write('Error:')
+  logger.write(error)
+})
+
 module.exports = { app, server }
