@@ -1,0 +1,6 @@
+{
+    "greeting": [{
+        "locale": "default",
+        "text": "An English dictionary bot app built for Messenger"
+    }]
+}
