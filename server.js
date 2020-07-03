@@ -20,8 +20,8 @@
 const express = require('express')
 const serveIndex = require('serve-index')
 const cors = require('cors')
-const crypto = require('crypto')
 
+const hash = require('./src/utils/hash.js')
 const logger = require('./src/utils/log.js')
 const send = require('./src/utils/send.js')
 const dictionary = require('./src/dictionary.js')
@@ -50,12 +50,11 @@ app.use(express.json({
     if (!signature) throw new Error('No signature')
 
     const elements = signature.split('=')
-    const method = elements[0]
-    const hash = elements[1]
-    const hmac = crypto.createHmac(method, APP_SECRET)
-    const expected = hmac.update(buf).digest('hex')
+    const algo = elements[0]
+    const defined = elements[1]
+    const expected = hash(algo, buf, APP_SECRET)
 
-    if (hash !== expected) {
+    if (defined !== expected) {
       logger.write('Invalid signature')
       logger.write(`Signature: ${signature}`)
       logger.write('Body:')

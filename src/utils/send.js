@@ -17,12 +17,13 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+const hash = require('./hash.js')
 const logger = require('./log.js')
 const request = require('./request.js')
-const getProof = require('./proof.js')
 
 const FB_ENDPOINT = 'https://graph.facebook.com/v7.0/me'
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN
+const APP_SECRET = process.env.APP_SECRET
 const DEBUG = process.env.DEBUG
 
 /**
@@ -35,8 +36,9 @@ const DEBUG = process.env.DEBUG
  */
 module.exports = async function (psid, text, type = 'message') {
   const params = new URLSearchParams()
+  const proof = hash('sha256', ACCESS_TOKEN, APP_SECRET)
   params.set('access_token', ACCESS_TOKEN)
-  params.set('appsecret_proof', getProof())
+  params.set('appsecret_proof', proof)
 
   const url = `${FB_ENDPOINT}/messages?${params.toString()}`
   const data = {
@@ -50,7 +52,7 @@ module.exports = async function (psid, text, type = 'message') {
 
   if (DEBUG) console.log(`Sending user "${psid}" (${type}): ${text}`)
   const response = await request('POST', url, {}, data)
-  const { body } = response
+  const body = response.body
 
   if (body.error) {
     logger.write(`Error when trying to send message: ${psid}`)
