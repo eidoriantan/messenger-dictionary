@@ -25,8 +25,8 @@ const API_KEY = process.env.API_KEY
 /**
  *  Gets the word's definitions using the Merriam-Webster's
  *
- *    @param {string} word    The word to get the definitions from
- *    @return {string} result
+ *  @param {string} word    The word to get the definitions from
+ *  @return {string} result
  */
 async function getDef (word) {
   word = word.replace(/[?%&]/g, '')

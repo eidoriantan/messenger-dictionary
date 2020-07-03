@@ -21,7 +21,7 @@ const hash = require('./hash.js')
 const logger = require('./log.js')
 const request = require('./request.js')
 
-const FB_ENDPOINT = 'https://graph.facebook.com/v7.0/me'
+const ME_ENDPOINT = 'https://graph.facebook.com/v7.0/me'
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN
 const APP_SECRET = process.env.APP_SECRET
 const DEBUG = process.env.DEBUG
@@ -29,10 +29,11 @@ const DEBUG = process.env.DEBUG
 /**
  *  Sends a message to user by calling Messenger's Send API.
  *
- *    @param {string} psid    User's page-scoped ID
- *    @param {string} text    The message to send
- *    @param {string} type    Send message type
- *    @return void
+ *  @param {string} psid    User's page-scoped ID
+ *  @param {string} text    The message to send
+ *  @param {string} type    Send message type
+ *
+ *  @return {boolean}
  */
 module.exports = async function (psid, text, type = 'message') {
   const params = new URLSearchParams()
@@ -40,15 +41,17 @@ module.exports = async function (psid, text, type = 'message') {
   params.set('access_token', ACCESS_TOKEN)
   params.set('appsecret_proof', proof)
 
-  const url = `${FB_ENDPOINT}/messages?${params.toString()}`
+  const url = `${ME_ENDPOINT}/messages?${params.toString()}`
   const data = {
     messaging_type: 'RESPONSE',
     notification_type: 'SILENT_PUSH',
     recipient: { id: psid }
   }
 
-  if (type === 'message') data.message = { text }
-  else data.sender_action = type
+  if (type === 'message') {
+    if (text.length <= 2000) data.message = { text }
+    else return false
+  } else data.sender_action = type
 
   if (DEBUG) console.log(`Sending user "${psid}" (${type}): ${text}`)
   const response = await request('POST', url, {}, data)
@@ -59,5 +62,8 @@ module.exports = async function (psid, text, type = 'message') {
     logger.write(`Error(${body.error.code}): ${body.error.message}`)
     logger.write('Data:')
     logger.write(data)
+    return false
   }
+
+  return true
 }

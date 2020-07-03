@@ -128,8 +128,8 @@ app.post('/webhook', (req, res) => {
 /**
  *  Handles all messages received.
  *
- *    @param {object} event    Event object sent by Facebook
- *    @return void
+ *  @param {object} event    Event object sent by Facebook
+ *  @return void
  */
 async function receivedMessage (event) {
   const senderID = event.sender.id
