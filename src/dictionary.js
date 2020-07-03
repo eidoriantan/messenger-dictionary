@@ -19,7 +19,7 @@
 
 const request = require('./utils/request.js')
 
-const API = 'https://dictionaryapi.com/api/v3/references/collegiate/json'
+const ENDPOINT = 'https://dictionaryapi.com/api/v3/references/collegiate/json'
 const API_KEY = process.env.API_KEY
 
 /**
@@ -34,7 +34,7 @@ async function getDef (word) {
   const params = new URLSearchParams()
   params.set('key', API_KEY)
 
-  const url = `${API}/${encodeURIComponent(word)}?${params.toString()}`
+  const url = `${ENDPOINT}/${encodeURIComponent(word)}?${params.toString()}`
   const response = await request('GET', url)
   const body = response.body
   let result = ''
@@ -63,8 +63,8 @@ async function getDef (word) {
       })
     })
 
-    result = `${count} word(s) was found\r\n\r\n` + result +
-      '\r\n\r\nPowered by: Merriam-Webster Dictionary'
+    result = `${count} word(s) was found\r\n\r\n${result}\r\n` +
+      'Powered by: Merriam-Webster Dictionary'
   }
 
   return result
