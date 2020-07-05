@@ -140,8 +140,14 @@ async function receivedMessage (event) {
     text = message.text.trim().toLowerCase()
   }
 
-  if (message.attachments) {
-    await send(senderID, 'We don\'t currently support handling attachments')
+  if (message.attachments && message.attachments.length > 0) {
+    for (let i = 0; i < message.attachments.length; i++) {
+      const attachment = message.attachments[i]
+      if (!attachment.payload.sticker_id) {
+        await send(senderID, 'We don\'t currently support handling attachments')
+      }
+    }
+
     return
   }
 
