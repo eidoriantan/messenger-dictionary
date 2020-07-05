@@ -136,6 +136,11 @@ async function receivedMessage (event) {
   const message = event.message
   let text = ''
 
+  if (DEBUG) console.log(`Message was received with text: ${text}`)
+
+  await send(senderID, null, 'mark_seen')
+  await send(senderID, null, 'typing_on')
+
   if (message.text && typeof message.text === 'string') {
     text = message.text.trim().toLowerCase()
   }
@@ -150,10 +155,6 @@ async function receivedMessage (event) {
 
     return
   }
-
-  if (DEBUG) console.log(`Message was received with text: ${text}`)
-  await send(senderID, null, 'mark_seen')
-  await send(senderID, null, 'typing_on')
 
   const response = await dictionary.getDef(text)
   await send(senderID, response)
