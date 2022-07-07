@@ -11,13 +11,13 @@
     "app",
     "dictionary"
   ],
-  "homepage": "https://dictionary.eidoriantan.tk",
+  "homepage": "https://dictionary.eidoriantan.me",
   "bugs": "https://github.com/eidoriantan/messenger-dictionary/issues",
   "license": "GPL-3.0-only",
   "author": {
     "name": "Adriane Justine Tan",
-    "email": "eidoriantan@gmail.com",
-    "url": "https://eidoriantan.tk"
+    "email": "admin@eidoriantan.me",
+    "url": "https://eidoriantan.me"
   },
   "contributors": [],
   "funding": {
